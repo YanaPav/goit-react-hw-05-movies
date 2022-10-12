@@ -32,6 +32,7 @@ export const MovieDetails = () => {
 
   return (
     <>
+      {error && <div>error</div>}
       <div>
         <img
           src={`https://image.tmdb.org/t/p/original${poster_path}`}
