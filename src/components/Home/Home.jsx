@@ -10,6 +10,7 @@ export const HomePage = () => {
     async function getTrendingMovies() {
       try {
         const movies = await fetchTrendingMovies();
+        console.log(movies);
         setTrendingMovies(movies);
       } catch (e) {
         setError(e);
@@ -36,7 +37,7 @@ export const HomePage = () => {
         {trendingMovies.map(({ title, name, id }) => {
           return (
             <li key={id}>
-              <Link to={`/movies/:${id}`}>{title || name}</Link>
+              <Link to={`/movies/${id}`}>{title || name}</Link>
             </li>
           );
         })}

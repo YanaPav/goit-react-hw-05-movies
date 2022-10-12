@@ -1,11 +1,67 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams, Link } from 'react-router-dom';
 import { fetchMovieById } from '../../api';
 
 export const MovieDetails = () => {
-  const [movie, setMovie] = useState('');
+  const [movieDtls, setMovieDtls] = useState('');
+  const [error, setError] = useState(null);
   const { movieId } = useParams();
   console.log(movieId);
 
-  return <div>it`s works</div>;
+  useEffect(() => {
+    async function getMovieDtls() {
+      try {
+        const movieInfo = await fetchMovieById(movieId);
+        console.log(movieInfo);
+        setMovieDtls(movieInfo);
+      } catch (e) {
+        setError(e);
+      }
+    }
+
+    getMovieDtls();
+
+    return () => {
+      setError(null);
+    };
+  }, []);
+
+  if (!movieDtls) return;
+
+  const { poster_path, title, release_date, vote_average, overview, genres } =
+    movieDtls;
+
+  return (
+    <>
+      <div>
+        <img
+          src={`https://image.tmdb.org/t/p/original${poster_path}`}
+          alt={title}
+          width="250"
+        />
+        <div>
+          <h2>
+            {title} ({Number.parseInt(release_date)})
+          </h2>
+          <p>User Score: {Math.round(vote_average * 10)}%</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          <p>{genres.map(genre => genre.name).join(', ')}</p>
+        </div>
+      </div>
+      <div>
+        <p>Additional information</p>
+        <ul>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
+      </div>
+      <Outlet />
+    </>
+  );
 };
