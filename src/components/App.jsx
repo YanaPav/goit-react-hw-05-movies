@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './Navbar/Navbar';
 import { HomePage } from './Home/Home';
 import { MovieDetails } from './MovieDetails/MovieDetails';

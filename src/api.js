@@ -1,9 +1,9 @@
 const API_KEY = '166126da2ada1c4f9b0d0d682350475b'
 const BASE_URL = 'https://api.themoviedb.org/3'
-const LANGUAGE = 'language=en-US'
+const LANGUAGE = 'en-US'
 
 export async function fetchTrendingMovies() {
-    const response = await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US`)
+    const response = await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=${LANGUAGE}`)
     if (response.ok) {
         const data = await response.json()
         return data.results
@@ -12,7 +12,7 @@ export async function fetchTrendingMovies() {
 }  
 
 export async function fetchMovieById(id) {
-    const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`)
+    const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${LANGUAGE}`)
     if (response.ok) {
         const data = await response.json()
         return data

@@ -6,7 +6,6 @@ export const MovieDetails = () => {
   const [movieDtls, setMovieDtls] = useState('');
   const [error, setError] = useState(null);
   const { movieId } = useParams();
-  console.log(movieId);
 
   useEffect(() => {
     async function getMovieDtls() {
@@ -24,7 +23,7 @@ export const MovieDetails = () => {
     return () => {
       setError(null);
     };
-  }, []);
+  }, [movieId]);
 
   if (!movieDtls) return;
 
@@ -54,7 +53,7 @@ export const MovieDetails = () => {
         <p>Additional information</p>
         <ul>
           <li>
-            <Link to="cast">Cast</Link>
+            <Link to="сast">Cast</Link>
           </li>
           <li>
             <Link to="reviews">Reviews</Link>
