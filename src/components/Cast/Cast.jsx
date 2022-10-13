@@ -12,7 +12,7 @@ export const Cast = () => {
     async function getCastInfo() {
       try {
         const data = await fetchCast(movieId);
-        setCastInfo(data.cast);
+        setCastInfo(data);
       } catch (e) {
         setError(e);
       }

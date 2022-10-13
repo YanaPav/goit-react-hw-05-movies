@@ -24,14 +24,22 @@ export async function fetchCast(id) {
      const response = await fetch(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${LANGUAGE}`)
     if (response.ok) {
         const data = await response.json()
-        console.log(data)
-        return data
+        return data.cast
     }
     return new Error()
 }
 
 export async function fetchReviews(id) {
      const response = await fetch(`${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=${LANGUAGE}&page=1`)
+    if (response.ok) {
+        const data = await response.json()
+        return data.results
+    }
+    return new Error()
+}
+
+export async function fetchMoviesByQuery(query) {
+     const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=${LANGUAGE}&page=1&query=${query}`)
     if (response.ok) {
         const data = await response.json()
         console.log(data)

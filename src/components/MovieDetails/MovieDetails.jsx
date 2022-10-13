@@ -8,7 +8,7 @@ export const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
 
-  console.log(location);
+  // console.log(location);
 
   useEffect(() => {
     async function getMovieDtls() {
@@ -34,7 +34,7 @@ export const MovieDetails = () => {
 
   return (
     <>
-      <Link to={location.state.from}>Go back</Link>
+      <Link to={location.state?.from}>Go back</Link>
       {error && <div>error</div>}
       <div>
         <img
@@ -57,10 +57,14 @@ export const MovieDetails = () => {
         <p>Additional information</p>
         <ul>
           <li>
-            <Link to="сast">Cast</Link>
+            <Link to="сast" state={{ from: location.state.from }}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <Link to="reviews" state={{ from: location.state.from }}>
+              Reviews
+            </Link>
           </li>
         </ul>
       </div>

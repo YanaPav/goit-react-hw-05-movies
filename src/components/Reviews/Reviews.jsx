@@ -12,10 +12,10 @@ export const Reviews = () => {
       try {
         const data = await fetchReviews(movieId);
 
-        if (data.results.length === 0) {
+        if (data.length === 0) {
           throw new Error('Oooops there are no reviews yet =(');
         }
-        setReviews(data.results);
+        setReviews(data);
       } catch (e) {
         setError(e);
       }
