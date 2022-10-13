@@ -15,7 +15,6 @@ export const Reviews = () => {
         if (data.results.length === 0) {
           throw new Error('Oooops there are no reviews yet =(');
         }
-        console.log(data.results);
         setReviews(data.results);
       } catch (e) {
         setError(e);

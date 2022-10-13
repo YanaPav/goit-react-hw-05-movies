@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Outlet, useParams, Link } from 'react-router-dom';
+import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
 import { fetchMovieById } from '../../api';
 
 export const MovieDetails = () => {
   const [movieDtls, setMovieDtls] = useState('');
   const [error, setError] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
+
+  console.log(location);
 
   useEffect(() => {
     async function getMovieDtls() {
@@ -31,6 +34,7 @@ export const MovieDetails = () => {
 
   return (
     <>
+      <Link to={location.state.from}>Go back</Link>
       {error && <div>error</div>}
       <div>
         <img
