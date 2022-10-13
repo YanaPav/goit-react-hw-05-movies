@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { fetchCast } from '../../api';
 import { useParams } from 'react-router-dom';
-import noPhoto from './noPhoto.jpg';
+import { fetchCast } from '../../api';
+import noPhoto from './noPhoto.png';
 
 export const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
@@ -36,9 +36,11 @@ export const Cast = () => {
           return (
             <li key={id}>
               <img
-                src={`https://image.tmdb.org/t/p/original${
-                  profile_path || noPhoto
-                }`}
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/original${profile_path}`
+                    : noPhoto
+                }
                 alt={name}
                 width="100"
               />

@@ -29,3 +29,13 @@ export async function fetchCast(id) {
     }
     return new Error()
 }
+
+export async function fetchReviews(id) {
+     const response = await fetch(`${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=${LANGUAGE}&page=1`)
+    if (response.ok) {
+        const data = await response.json()
+        console.log(data)
+        return data
+    }
+    return new Error()
+}
