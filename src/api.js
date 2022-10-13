@@ -19,3 +19,13 @@ export async function fetchMovieById(id) {
     }
     return new Error()
 }  
+
+export async function fetchCast(id) {
+     const response = await fetch(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${LANGUAGE}`)
+    if (response.ok) {
+        const data = await response.json()
+        console.log(data)
+        return data
+    }
+    return new Error()
+}

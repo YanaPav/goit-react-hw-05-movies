@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './Navbar/Navbar';
 import { HomePage } from './Home/Home';
 import { MovieDetails } from './MovieDetails/MovieDetails';
+import { Cast } from './Cast/Cast';
 
 export const App = () => {
   return (
@@ -11,10 +12,11 @@ export const App = () => {
           <Route index element={<HomePage />} />
           <Route path="movies" element={<div>movies</div>} />
           <Route path="movies/:movieId" element={<MovieDetails />}>
-            <Route path="сast" element={<div>сast</div>} />
+            <Route path="сast" element={<Cast />} />
             <Route path="reviews" element={<div>reviews</div>} />
           </Route>
         </Route>
+        <Route path="*" element={<div>Page doesn't exists</div>} />
       </Routes>
     </div>
   );

@@ -10,7 +10,6 @@ export const HomePage = () => {
     async function getTrendingMovies() {
       try {
         const movies = await fetchTrendingMovies();
-        console.log(movies);
         setTrendingMovies(movies);
       } catch (e) {
         setError(e);

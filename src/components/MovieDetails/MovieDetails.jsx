@@ -11,7 +11,6 @@ export const MovieDetails = () => {
     async function getMovieDtls() {
       try {
         const movieInfo = await fetchMovieById(movieId);
-        console.log(movieInfo);
         setMovieDtls(movieInfo);
       } catch (e) {
         setError(e);
