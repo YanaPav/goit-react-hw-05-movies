@@ -5,6 +5,10 @@ export const ListItem = styled.li`
     margin-bottom: 4px;
   }
 
+  &:hover {
+    cursor: pointer;
+  }
+
   a {
     display: inline-block;
     transform: scale(1);
