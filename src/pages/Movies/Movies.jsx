@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { fetchMoviesByQuery } from '../../api';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { SearchForm } from '../../components/SearchForm/SearchForm';
+import { Container } from '../../components/Container/Container.styled';
+import { ListItem } from '../Home/Home.styled';
 
 const Movies = () => {
   const [searchMovies, setSearchMovies] = useState([]);
@@ -37,22 +39,22 @@ const Movies = () => {
   }
 
   return (
-    <>
+    <Container>
       <SearchForm getQuery={getQueryFromInput} value={query} />
       {error && <p>{error.message}</p>}
 
       {searchMovies && (
         <ul>
           {searchMovies.map(({ id, title }) => (
-            <li key={id}>
+            <ListItem key={id}>
               <Link to={`/movies/${id}`} state={{ from: location }}>
                 {title}
               </Link>
-            </li>
+            </ListItem>
           ))}
         </ul>
       )}
-    </>
+    </Container>
   );
 };
 

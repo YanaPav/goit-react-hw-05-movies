@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCast } from '../../api';
 import noPhoto from './noPhoto.png';
+import { CastListItem } from './Cast.styled';
 
 const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
@@ -34,7 +35,7 @@ const Cast = () => {
       <ul>
         {castInfo.map(({ name, profile_path, character, id }) => {
           return (
-            <li key={id}>
+            <CastListItem key={id}>
               <img
                 src={
                   profile_path
@@ -44,9 +45,11 @@ const Cast = () => {
                 alt={name}
                 width="100"
               />
-              <p>{name}</p>
-              <p>Character: {character}</p>
-            </li>
+              <div>
+                <p>{name}</p>
+                <p>Character: {character}</p>
+              </div>
+            </CastListItem>
           );
         })}
       </ul>

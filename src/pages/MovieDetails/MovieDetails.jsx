@@ -1,6 +1,14 @@
 import { useState, useEffect, Suspense } from 'react';
-import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { fetchMovieById } from '../../api';
+import { Container } from '../../components/Container/Container.styled';
+import {
+  GoBackLink,
+  MainBox,
+  AdditionalInfoBox,
+  StyledNavLink,
+} from './MovieDetails.styled';
+import { BsArrowLeft } from 'react-icons/bs';
 
 const MovieDetails = () => {
   const [movieDtls, setMovieDtls] = useState('');
@@ -34,43 +42,60 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Link to={location.state?.from || '/'}>Go back</Link>
-      {error && <div>error</div>}
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/original${poster_path}`}
-          alt={title}
-          width="250"
-        />
-        <div>
-          <h2>
-            {title} ({Number.parseInt(release_date)})
-          </h2>
-          <p>User Score: {Math.round(vote_average * 10)}%</p>
-          <h3>Overview</h3>
-          <p>{overview}</p>
-          <h3>Genres</h3>
-          <p>{genres.map(genre => genre.name).join(', ')}</p>
-        </div>
-      </div>
-      <div>
-        <p>Additional information</p>
-        <ul>
-          <li>
-            <Link to="сast" state={{ from: location.state?.from }}>
-              Cast
-            </Link>
-          </li>
-          <li>
-            <Link to="reviews" state={{ from: location.state?.from }}>
-              Reviews
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
+      <Container>
+        <GoBackLink to={location.state?.from || '/'}>
+          <BsArrowLeft />
+          Go back
+        </GoBackLink>
+      </Container>
+
+      <Container>
+        {error && <div>error</div>}
+        <MainBox>
+          <img
+            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            alt={title}
+            width="220"
+          />
+          <div>
+            <h2>
+              {title} ({Number.parseInt(release_date)})
+            </h2>
+            <p>User Score: {Math.round(vote_average * 10)}%</p>
+            <h3>Overview</h3>
+            <p>{overview}</p>
+            <h3>Genres</h3>
+            <p>{genres.map(genre => genre.name).join(', ')}</p>
+          </div>
+        </MainBox>
+      </Container>
+
+      <AdditionalInfoBox>
+        <Container>
+          <p>Additional information</p>
+          <ul>
+            <li>
+              <StyledNavLink to="сast" state={{ from: location.state?.from }}>
+                Cast
+              </StyledNavLink>
+            </li>
+            <li>
+              <StyledNavLink
+                to="reviews"
+                state={{ from: location.state?.from }}
+              >
+                Reviews
+              </StyledNavLink>
+            </li>
+          </ul>
+        </Container>
+      </AdditionalInfoBox>
+
+      <Container>
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
+      </Container>
     </>
   );
 };

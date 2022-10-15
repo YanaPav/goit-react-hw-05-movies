@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import { Navbar } from './Navbar/Navbar';
 import { HomePage } from '../pages/Home/Home';
+import GlobalStyle from './GlobalStyles';
 // import { MovieDetails } from '../pages/MovieDetails/MovieDetails';
 // import { Cast } from './Cast/Cast';
 // import { Reviews } from './Reviews/Reviews';
@@ -26,6 +27,7 @@ export const App = () => {
         </Route>
         <Route path="*" element={<div>Page doesn't exists</div>} />
       </Routes>
+      <GlobalStyle />
     </>
   );
 };

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { fetchTrendingMovies } from '../../api';
 import { Link, useLocation } from 'react-router-dom';
+import { Container } from '../../components/Container/Container.styled';
+import { ListItem } from './Home.styled';
 
 export const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -25,7 +27,7 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       <h1>Trending today</h1>
       {error && (
         <>
@@ -36,14 +38,14 @@ export const HomePage = () => {
       <ul>
         {trendingMovies.map(({ title, name, id }) => {
           return (
-            <li key={id}>
+            <ListItem key={id}>
               <Link to={`/movies/${id}`} state={{ from: location }}>
                 {title || name}
               </Link>
-            </li>
+            </ListItem>
           );
         })}
       </ul>
-    </>
+    </Container>
   );
 };

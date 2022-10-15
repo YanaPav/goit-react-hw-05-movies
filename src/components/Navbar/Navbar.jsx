@@ -1,17 +1,21 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
+import { Header, StyledLink } from './Navbar.styled';
+import { Container } from '../../components/Container/Container.styled';
 
 export const Navbar = () => {
   return (
     <>
-      <header>
-        <nav>
-          <NavLink to="/" end>
-            Home
-          </NavLink>
-          <NavLink to="/movies">Movies</NavLink>
-        </nav>
-      </header>
+      <Header>
+        <Container>
+          <nav>
+            <StyledLink to="/" end>
+              Home
+            </StyledLink>
+            <StyledLink to="/movies">Movies</StyledLink>
+          </nav>
+        </Container>
+      </Header>
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>

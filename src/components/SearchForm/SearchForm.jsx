@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Form } from './SearchForm.styled';
 
 export const SearchForm = ({ getQuery, value }) => {
   const [query, setQuery] = useState(value || '');
@@ -14,7 +15,7 @@ export const SearchForm = ({ getQuery, value }) => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       <input
         type="text"
         name="query"
@@ -22,6 +23,6 @@ export const SearchForm = ({ getQuery, value }) => {
         onChange={e => setQuery(e.target.value)}
       />
       <button type="submit">Search</button>
-    </form>
+    </Form>
   );
 };
