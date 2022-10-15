@@ -1,21 +1,26 @@
-import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 
-export const SearchForm = ({ onSubmit }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query') ?? '';
+export const SearchForm = ({ getQuery, value }) => {
+  const [query, setQuery] = useState(value || '');
 
-  function onChange(e) {
-    const userQuery = e.target.value;
-    const param = `query=${userQuery.trim()}`;
-    if (param) {
-      setSearchParams(param);
+  function onSubmit(e) {
+    e.preventDefault();
+    const value = e.currentTarget.elements.query.value;
+    if (value.trim() === '') {
+      alert('Type something!');
+      return;
     }
+    getQuery(value.trim());
   }
 
   return (
     <form onSubmit={onSubmit}>
-      <input type="text" name="query" value={query} onChange={onChange} />
+      <input
+        type="text"
+        name="query"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+      />
       <button type="submit">Search</button>
     </form>
   );

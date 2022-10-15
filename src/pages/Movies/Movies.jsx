@@ -4,28 +4,23 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { SearchForm } from '../../components/SearchForm/SearchForm';
 
 const Movies = () => {
-  const [userQuery, setUserQuery] = useState('');
   const [searchMovies, setSearchMovies] = useState([]);
-  const [error, setError] = useState(null);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
+  const [error, setError] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
-    if (query) setUserQuery(query);
-  }, []);
-
-  useEffect(() => {
-    if (!userQuery) return;
+    if (!query) return;
 
     async function getMoviesByQuery() {
       try {
-        const movies = await fetchMoviesByQuery(userQuery);
+        const movies = await fetchMoviesByQuery(query);
         if (movies.length > 0) {
           setSearchMovies(movies);
         }
         if (movies.length === 0) {
-          console.log('movies is empty');
+          throw new Error(`No movies on the search query ${query}`);
         }
       } catch (e) {
         setError(e);
@@ -33,18 +28,17 @@ const Movies = () => {
     }
 
     getMoviesByQuery();
-  }, [userQuery]);
+  }, [query]);
 
-  function onSubmit(e) {
+  function getQueryFromInput(query) {
     setError(null);
-    console.log(query);
-    e.preventDefault();
-    setUserQuery(query);
+    const params = `query=${query}`;
+    setSearchParams(params);
   }
 
   return (
     <>
-      <SearchForm onSubmit={onSubmit} />
+      <SearchForm getQuery={getQueryFromInput} value={query} />
       {error && <p>{error.message}</p>}
 
       {searchMovies && (
