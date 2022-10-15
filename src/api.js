@@ -42,8 +42,7 @@ export async function fetchMoviesByQuery(query) {
      const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=${LANGUAGE}&page=1&query=${query}`)
     if (response.ok) {
         const data = await response.json()
-        console.log(data)
-        return data
+        return data.results
     }
     return new Error()
 }

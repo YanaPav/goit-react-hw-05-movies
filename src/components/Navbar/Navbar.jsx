@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 
 export const Navbar = () => {
   return (
@@ -11,7 +12,9 @@ export const Navbar = () => {
           <NavLink to="/movies">Movies</NavLink>
         </nav>
       </header>
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

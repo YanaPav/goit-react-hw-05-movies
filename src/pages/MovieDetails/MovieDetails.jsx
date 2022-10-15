@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
 import { fetchMovieById } from '../../api';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movieDtls, setMovieDtls] = useState('');
   const [error, setError] = useState(null);
   const { movieId } = useParams();
@@ -34,7 +34,7 @@ export const MovieDetails = () => {
 
   return (
     <>
-      <Link to={location.state?.from}>Go back</Link>
+      <Link to={location.state?.from || '/'}>Go back</Link>
       {error && <div>error</div>}
       <div>
         <img
@@ -57,18 +57,22 @@ export const MovieDetails = () => {
         <p>Additional information</p>
         <ul>
           <li>
-            <Link to="сast" state={{ from: location.state.from }}>
+            <Link to="сast" state={{ from: location.state?.from }}>
               Cast
             </Link>
           </li>
           <li>
-            <Link to="reviews" state={{ from: location.state.from }}>
+            <Link to="reviews" state={{ from: location.state?.from }}>
               Reviews
             </Link>
           </li>
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
+
+export default MovieDetails;
