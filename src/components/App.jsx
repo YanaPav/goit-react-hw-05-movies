@@ -24,8 +24,8 @@ export const App = () => {
             <Route path="сast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
+          <Route path="*" element={<div>Page doesn't exist</div>} />
         </Route>
-        <Route path="*" element={<div>Page doesn't exists</div>} />
       </Routes>
       <GlobalStyle />
     </>

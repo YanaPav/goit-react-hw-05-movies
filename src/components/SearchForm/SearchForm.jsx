@@ -29,6 +29,6 @@ export const SearchForm = ({ getQuery, value }) => {
 };
 
 SearchForm.propTypes = {
-  getQuery: PropTypes.func,
-  value: PropTypes.string,
+  getQuery: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
